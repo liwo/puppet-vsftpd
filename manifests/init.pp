@@ -47,6 +47,8 @@ class vsftpd (
   $listen_port             = undef,
   $pam_service_name        = 'vsftpd',
   $userlist_enable         = 'YES',
+  $userlist_file_path      = '/etc/vsftpd.user_list',
+  $userlist_users          = [],
   $userlist_deny           = undef,
   $tcp_wrappers            = 'YES',
   $hide_file               = undef,
@@ -75,6 +77,14 @@ class vsftpd (
     require => Package[$package_name],
     content => template($template),
     notify  => Service[$service_name],
+  }
+
+  if $userlist_enable == 'YES' {
+    file { $userlist_file_path:
+      require => Package[$package_name],
+      content => template('vsftpd/vsftpd.user_list.erb'),
+      notify  => Service[$service_name],
+    }
   }
 
 }

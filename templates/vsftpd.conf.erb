@@ -173,6 +173,9 @@ userlist_enable=<%= @userlist_enable %>
 <% if @userlist_deny -%>
 userlist_deny=<%= @userlist_deny %>
 <% end -%>
+<% if @userlist_file_path -%>
+userlist_file=<%= @userlist_file_path %>
+<% end-%>
 tcp_wrappers=<%= @tcp_wrappers %>
 <% if @hide_file -%>
 hide_file=<%= @hide_file %>
